@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CalculatorAndroid</string>
+    <string name="name_calculate_button">Calculate</string>
+    <string name="name_clear_expression_button">Clear Expression</string>
+</resources>
