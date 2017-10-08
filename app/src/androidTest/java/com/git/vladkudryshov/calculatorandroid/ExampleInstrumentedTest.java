@@ -20,7 +20,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        final Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.git.vladkudryshov.calculatorandroid", appContext.getPackageName());
     }

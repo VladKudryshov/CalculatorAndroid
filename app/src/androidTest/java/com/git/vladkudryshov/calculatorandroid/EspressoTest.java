@@ -19,14 +19,13 @@ public class EspressoTest {
     public final ActivityTestRule<CalculatorActivity> activityTestRule = new ActivityTestRule<>(CalculatorActivity.class);
 
     @Before
-    public void onInit(){
+    public void onInit() {
         onView(withId(R.id.expression_edit_text))
                 .perform(typeText("2+2*2"));
     }
 
-
     @Test
-    public void EnabledButtonTest(){
+    public void EnabledButtonTest() {
         onView(withId(R.id.expression_edit_text))
                 .check(matches(withText("2+2*2")));
         onView(withId(R.id.calculate_button))

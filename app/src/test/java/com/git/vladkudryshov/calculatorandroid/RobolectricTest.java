@@ -20,29 +20,27 @@ public class RobolectricTest {
     private ActivityController<CalculatorActivity> activityController;
 
     @Before
-    public void onInit(){
+    public void onInit() {
         activityController = Robolectric.buildActivity(CalculatorActivity.class);
     }
 
     @Test
-    public void testMainActivity(){
+    public void testCalculatorActivity() {
         activityController.create();
         activityController.start();
         activityController.resume();
 
-        final CalculatorActivity mainActivity =activityController.get();
+        final CalculatorActivity mainActivity = activityController.get();
         final EditText expressionEditText = (EditText) mainActivity.findViewById(R.id.expression_edit_text);
         final TextView resultTextView = (TextView) mainActivity.findViewById(R.id.result_text_view);
 
         expressionEditText.setText("(2+2)*2");
         mainActivity.findViewById(R.id.calculate_button).performClick();
-        assertEquals(resultTextView.getText().toString(),"Result calculate: 8.0");
+        assertEquals(resultTextView.getText().toString(), "Result calculate: 8.0");
 
         activityController.pause();
         activityController.stop();
         activityController.destroy();
     }
-
-
 
 }

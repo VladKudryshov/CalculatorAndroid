@@ -1,8 +1,5 @@
 package com.git.vladkudryshov.calculatorandroid.logic.validator;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -23,8 +20,8 @@ public final class Validator {
 
     private static boolean divideByZeroValidator(final CharSequence exp) {
         return Pattern.matches(".+/\\s*0[+\\-*/^()]*([^.]*)", exp) ||
-                Pattern.matches(".+\\/\\((.*)-\\1\\)", exp) ||
-                Pattern.matches(".+\\/\\((.*)*0\\)", exp);
+                Pattern.matches(".+/\\((.*)-\\1\\)", exp) ||
+                Pattern.matches(".+/\\((.*)*0\\)", exp);
     }
 
     private static boolean parenthesesValidator(final String exp) {

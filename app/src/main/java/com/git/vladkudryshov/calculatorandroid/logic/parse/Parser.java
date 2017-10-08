@@ -1,14 +1,15 @@
 package com.git.vladkudryshov.calculatorandroid.logic.parse;
 
 public interface Parser {
-    static String splitExpression(String exp) {
+
+    static String splitExpression(final String exp) {
         String splittedExp = "";
-        exp = " " + exp;
-        for (int i = 0; i < exp.length(); i++) {
-            if ((exp.charAt(i) == '-' && !Character.isDigit(exp.charAt(i - 1))) || Character.isDigit(exp.charAt(i)) || exp.charAt(i) == '.') {
-                splittedExp += exp.charAt(i);
+        final String temp = " " + exp;
+        for (int i = 0; i < temp.length(); i++) {
+            if ((temp.charAt(i) == '-' && !Character.isDigit(temp.charAt(i - 1))) || Character.isDigit(temp.charAt(i)) || temp.charAt(i) == '.') {
+                splittedExp += temp.charAt(i);
             } else {
-                splittedExp += " " + exp.charAt(i) + " ";
+                splittedExp += " " + temp.charAt(i) + " ";
             }
         }
         return splittedExp.trim();

@@ -4,18 +4,12 @@ import com.git.vladkudryshov.calculatorandroid.logic.algorithm.PolishNotation;
 import com.git.vladkudryshov.calculatorandroid.logic.algorithm.ShuntingYard;
 import com.git.vladkudryshov.calculatorandroid.logic.model.Expression;
 import com.git.vladkudryshov.calculatorandroid.logic.parse.Parser;
-import com.git.vladkudryshov.calculatorandroid.logic.parse.ParserImpl;
 import com.git.vladkudryshov.calculatorandroid.logic.validator.Validator;
-
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+import static org.junit.Assert.assertEquals;
+
 public class ValidateExpressionTest {
 
     private static final double DELTA = 1e-15;
@@ -54,12 +48,7 @@ public class ValidateExpressionTest {
             data.setPostfixExp(ShuntingYard.infixToPostfix(data.getStrExp()));
             result = PolishNotation.calculateExp(data.getPostfixExp());
         }
-        assertEquals(result,8.0,DELTA);
+        assertEquals(result, 8.0, DELTA);
     }
-
-
-
-
-
 
 }

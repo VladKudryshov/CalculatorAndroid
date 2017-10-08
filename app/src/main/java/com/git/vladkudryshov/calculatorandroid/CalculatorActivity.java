@@ -6,9 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,15 +17,13 @@ import com.git.vladkudryshov.calculatorandroid.logic.model.Expression;
 import com.git.vladkudryshov.calculatorandroid.logic.parse.Parser;
 import com.git.vladkudryshov.calculatorandroid.logic.validator.Validator;
 
-public class CalculatorActivity extends AppCompatActivity implements IActivity{
+public class CalculatorActivity extends AppCompatActivity implements IActivity {
 
     private EditText mExpressionEditText;
     private Button mCalculateButton;
     private Button mClearResultButton;
     private TextView mResultTextView;
     private Toast errorMessage;
-
-
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -48,7 +43,7 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity{
         mCalculateButton.setOnClickListener(pView -> {
             final String expression = mExpressionEditText.getText().toString();
             final String result = calculate(expression);
-            if(result!=null) {
+            if (result != null) {
                 showResult(result);
             } else {
                 final Context context = getApplicationContext();
@@ -67,10 +62,10 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity{
             @Override
             public void onTextChanged(final CharSequence pCharSequence, final int pI, final int pI1, final int pI2) {
                 final int textSize = pCharSequence.length();
-                if (textSize!=0){
+                if (textSize != 0) {
                     mCalculateButton.setEnabled(true);
                     mClearResultButton.setEnabled(true);
-                }else {
+                } else {
                     mCalculateButton.setEnabled(false);
                     mClearResultButton.setEnabled(false);
                 }
@@ -102,7 +97,6 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity{
         errorMessage.show();
         return null;
     }
-
 
     @Override
     public boolean isEmpty(final int sizeExpression) {

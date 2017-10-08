@@ -2,38 +2,43 @@ package com.git.vladkudryshov.calculatorandroid.logic.algorithm;
 
 import java.util.Stack;
 
-public class PolishNotation {
-    public static Double calculateExp(String exp) {
-        Stack<Double> stack = new Stack<>();
-        for (String token : exp.split(" ")) {
-            Double numb = null;
+public final class PolishNotation {
+
+    public static Double calculateExp(final String exp) {
+        final Stack<Double> stack = new Stack<>();
+
+        double numberTwo;
+        double numberOne;
+
+        for (final String token : exp.split(" ")) {
+            Double decimal = null;
             try {
-                numb = Double.parseDouble(token);
-            } catch (NumberFormatException e) {
+                decimal = Double.parseDouble(token);
+            } catch (final NumberFormatException ignored) {
             }
 
-            if (numb != null) {
+            if (decimal != null) {
                 stack.push(Double.parseDouble(token));
-            } else if (token.equals("^")) {
-                double op2 = stack.pop();
-                double op1 = stack.pop();
-                stack.push(Math.pow(op1, op2));
-            } else if (token.equals("*")) {
-                double op2 = stack.pop();
-                double op1 = stack.pop();
-                stack.push(op1 * op2);
-            } else if (token.equals("/")) {
-                double op2 = stack.pop();
-                double op1 = stack.pop();
-                stack.push(op1 / op2);
-            } else if (token.equals("+")) {
-                double op2 = stack.pop();
-                double op1 = stack.pop();
-                stack.push(op1 + op2);
-            } else if (token.equals("-")) {
-                double op2 = stack.pop();
-                double op1 = stack.pop();
-                stack.push(op1 - op2);
+            } else if ("^".equals(token)) {
+                numberTwo = stack.pop();
+                numberOne = stack.pop();
+                stack.push(Math.pow(numberOne, numberTwo));
+            } else if ("*".equals(token)) {
+                numberTwo = stack.pop();
+                numberOne = stack.pop();
+                stack.push(numberOne * numberTwo);
+            } else if ("/".equals(token)) {
+                numberTwo = stack.pop();
+                numberOne = stack.pop();
+                stack.push(numberOne / numberTwo);
+            } else if ("+".equals(token)) {
+                numberTwo = stack.pop();
+                numberOne = stack.pop();
+                stack.push(numberOne + numberTwo);
+            } else if ("-".equals(token)) {
+                numberTwo = stack.pop();
+                numberOne = stack.pop();
+                stack.push(numberOne - numberTwo);
             }
         }
         return stack.pop();
