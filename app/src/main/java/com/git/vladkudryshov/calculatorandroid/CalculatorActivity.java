@@ -21,7 +21,7 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity {
 
     private EditText mExpressionEditText;
     private Button mCalculateButton;
-    private Button mClearResultButton;
+    private Button mClearExpressionButton;
     private TextView mResultTextView;
     private Toast errorMessage;
 
@@ -35,10 +35,10 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity {
     private void initView() {
         mExpressionEditText = (EditText) findViewById(R.id.expression_edit_text);
         mCalculateButton = (Button) findViewById(R.id.calculate_button);
-        mClearResultButton = (Button) findViewById(R.id.clear_expression_button);
+        mClearExpressionButton = (Button) findViewById(R.id.clear_expression_button);
         mResultTextView = (TextView) findViewById(R.id.result_text_view);
 
-        mClearResultButton.setOnClickListener(pView -> mResultTextView.setText(""));
+        mClearExpressionButton.setOnClickListener(pView -> mExpressionEditText.setText(""));
 
         mCalculateButton.setOnClickListener(pView -> {
             final String expression = mExpressionEditText.getText().toString();
@@ -64,10 +64,10 @@ public class CalculatorActivity extends AppCompatActivity implements IActivity {
                 final int textSize = pCharSequence.length();
                 if (textSize != 0) {
                     mCalculateButton.setEnabled(true);
-                    mClearResultButton.setEnabled(true);
+                    mClearExpressionButton.setEnabled(true);
                 } else {
                     mCalculateButton.setEnabled(false);
-                    mClearResultButton.setEnabled(false);
+                    mClearExpressionButton.setEnabled(false);
                 }
             }
 
