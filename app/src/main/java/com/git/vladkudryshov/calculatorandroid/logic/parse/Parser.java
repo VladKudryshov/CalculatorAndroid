@@ -1,8 +1,7 @@
 package com.git.vladkudryshov.calculatorandroid.logic.parse;
 
-public class Parser {
-
-    public static String splitExpression(String exp) {
+public interface Parser {
+    static String splitExpression(String exp) {
         String splittedExp = "";
         exp = " " + exp;
         for (int i = 0; i < exp.length(); i++) {

@@ -14,13 +14,15 @@
         android:id="@+id/clear_expression_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name_clear_expression_button"/>
+        android:text="@string/name_clear_expression_button"
+        android:enabled="false"/>
 
     <Button
         android:id="@+id/calculate_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name_calculate_button"/>
+        android:text="@string/name_calculate_button"
+        android:enabled="false"/>
 
     <TextView
         android:id="@+id/result_text_view"

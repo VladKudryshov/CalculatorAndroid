@@ -4,6 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,13 +20,14 @@ import com.git.vladkudryshov.calculatorandroid.logic.model.Expression;
 import com.git.vladkudryshov.calculatorandroid.logic.parse.Parser;
 import com.git.vladkudryshov.calculatorandroid.logic.validator.Validator;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity implements IActivity{
 
     private EditText mExpressionEditText;
     private Button mCalculateButton;
-    private Button mClearExpressionButton;
+    private Button mClearResultButton;
     private TextView mResultTextView;
     private Toast errorMessage;
+
 
 
     @Override
@@ -35,33 +40,47 @@ public class CalculatorActivity extends AppCompatActivity {
     private void initView() {
         mExpressionEditText = (EditText) findViewById(R.id.expression_edit_text);
         mCalculateButton = (Button) findViewById(R.id.calculate_button);
-        mClearExpressionButton = (Button) findViewById(R.id.clear_expression_button);
+        mClearResultButton = (Button) findViewById(R.id.clear_expression_button);
         mResultTextView = (TextView) findViewById(R.id.result_text_view);
 
-        mClearExpressionButton.setOnClickListener(new View.OnClickListener() {
+        mClearResultButton.setOnClickListener(pView -> mResultTextView.setText(""));
 
-            @Override
-            public void onClick(final View pView) {
-                mResultTextView.setText("");
+        mCalculateButton.setOnClickListener(pView -> {
+            final String expression = mExpressionEditText.getText().toString();
+            final String result = calculate(expression);
+            if(result!=null) {
+                showResult(result);
+            } else {
+                final Context context = getApplicationContext();
+                errorMessage = Toast.makeText(context, "Please input correct expression", Toast.LENGTH_LONG);
+                errorMessage.show();
             }
         });
 
-        mCalculateButton.setOnClickListener(new View.OnClickListener() {
+        mExpressionEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onClick(final View pView) {
-                final String expression = mExpressionEditText.getText().toString();
-                final String result = calculate(expression);
-                if(result!=null) {
-                    showResult(result);
-                } else {
-                    final Context context = getApplicationContext();
-                    errorMessage = Toast.makeText(context, "Please input correct expression", Toast.LENGTH_LONG);
-                    errorMessage.show();
+            public void beforeTextChanged(final CharSequence pCharSequence, final int pI, final int pI1, final int pI2) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence pCharSequence, final int pI, final int pI1, final int pI2) {
+                final int textSize = pCharSequence.length();
+                if (textSize!=0){
+                    mCalculateButton.setEnabled(true);
+                    mClearResultButton.setEnabled(true);
+                }else {
+                    mCalculateButton.setEnabled(false);
+                    mClearResultButton.setEnabled(false);
                 }
             }
-        });
 
+            @Override
+            public void afterTextChanged(final Editable pEditable) {
+
+            }
+        });
     }
 
     private void showResult(final CharSequence result) {
@@ -82,5 +101,11 @@ public class CalculatorActivity extends AppCompatActivity {
         errorMessage = Toast.makeText(context, status, Toast.LENGTH_SHORT);
         errorMessage.show();
         return null;
+    }
+
+
+    @Override
+    public boolean isEmpty(final int sizeExpression) {
+        return sizeExpression == 0;
     }
 }

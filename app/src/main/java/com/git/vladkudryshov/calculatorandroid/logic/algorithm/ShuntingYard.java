@@ -6,8 +6,8 @@ public class ShuntingYard {
 
     public static String infixToPostfix(String infixExp) {
         StringBuilder outPostfixExp = new StringBuilder();
-        Stack<Integer> priorityStack = new Stack<>();
-        Stack<String> symbolsStack = new Stack<>();
+        final Stack<Integer> priorityStack = new Stack<>();
+        final Stack<String> symbolsStack = new Stack<>();
         for (String token : infixExp.split(" ")) {
             if (token.isEmpty()) {
                 continue;
