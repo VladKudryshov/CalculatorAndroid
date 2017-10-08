@@ -4,9 +4,11 @@ import com.git.vladkudryshov.calculatorandroid.logic.algorithm.PolishNotation;
 import com.git.vladkudryshov.calculatorandroid.logic.algorithm.ShuntingYard;
 import com.git.vladkudryshov.calculatorandroid.logic.model.Expression;
 import com.git.vladkudryshov.calculatorandroid.logic.parse.Parser;
+import com.git.vladkudryshov.calculatorandroid.logic.parse.ParserImpl;
 import com.git.vladkudryshov.calculatorandroid.logic.validator.Validator;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -14,7 +16,7 @@ import org.junit.Test;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ValidateExpressionTest {
 
     private static final double DELTA = 1e-15;
 
@@ -37,6 +39,7 @@ public class ExampleUnitTest {
         final String expression = "hello/2";
         final String status = Validator.checkErrorsExp(expression);
         assertEquals(status, "Expression isn't correct!");
+
     }
 
     @Test
@@ -51,7 +54,7 @@ public class ExampleUnitTest {
             data.setPostfixExp(ShuntingYard.infixToPostfix(data.getStrExp()));
             result = PolishNotation.calculateExp(data.getPostfixExp());
         }
-        assertEquals(result,8.1,DELTA);
+        assertEquals(result,8.0,DELTA);
     }
 
 
